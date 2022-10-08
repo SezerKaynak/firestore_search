@@ -56,7 +56,7 @@ class FirestoreSearchScaffold extends StatefulWidget {
   /// [firestoreCollectionName] , [dataListFromSnapshot] are required
   const FirestoreSearchScaffold({
     this.appBarBottom,
-    this.scaffoldBody = const Center(child: Text('Add a scaffold body')),
+    this.scaffoldBody = const Center(),
     this.appBarBackgroundColor,
     this.backButtonColor,
     this.clearSearchButtonColor,
@@ -122,6 +122,7 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
                       searchFocusNode.unfocus();
                       clearSearchQuery();
                     });
+
                   },
                 ),
               Expanded(
