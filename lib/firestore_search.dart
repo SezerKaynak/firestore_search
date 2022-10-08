@@ -160,6 +160,7 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
                         searchTextHintColor: widget.searchTextHintColor,
                         onClearButtonPressed: clearSearchQuery,
                         onSearchQueryChanged: updateSearchQuery,
+                        pressed: widget.pressed,
                       ),
               ),
               if (widget.showSearchIcon)
