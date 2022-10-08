@@ -42,7 +42,7 @@ class SearchFiled extends StatelessWidget {
                   bottom: 3.5, top: 3.5, right: 10.0, left: 10.0),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(20),
         color: searchBackgroundColor ?? Colors.blueGrey.withOpacity(.2),
       ),
       child: TextField(
