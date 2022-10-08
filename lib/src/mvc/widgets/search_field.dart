@@ -12,6 +12,7 @@ class SearchFiled extends StatelessWidget {
   final Function(String)? onSearchQueryChanged;
   final Function(String)? onSearchQueryUpdated;
   final Function(String)? onEditingComplete;
+  final Function()? pressed;
   TextEditingController? searchQueryController;
   SearchFiled(
       {this.showSearchIcon = false,
@@ -26,53 +27,61 @@ class SearchFiled extends StatelessWidget {
       this.onSearchQueryChanged,
       this.onSearchQueryUpdated,
       this.onEditingComplete,
-      Key? key})
+      Key? key, this.pressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      height: 40.0,
-      margin: showSearchIcon!
-          ? const EdgeInsets.only(bottom: 3.5, top: 3.5, right: 2.0, left: 2.0)
-          : isSearching!
-              ? const EdgeInsets.only(bottom: 3.5, top: 3.5, right: 10.0)
-              : const EdgeInsets.only(
-                  bottom: 3.5, top: 3.5, right: 10.0, left: 10.0),
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: searchBackgroundColor ?? Colors.blueGrey.withOpacity(.2),
-      ),
-      child: TextField(
-        controller: searchQueryController,
-        focusNode: searchFocusNode,
-        decoration: InputDecoration(
-          hintText: "Search...",
-          border: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          hintStyle: TextStyle(color: searchTextHintColor),
-          suffixIcon: searchQueryController!.text.isNotEmpty
-              ? IconButton(
-                  alignment: Alignment.centerRight,
-                  color: clearSearchButtonColor,
-                  icon: const Icon(Icons.clear),
-                  onPressed: onClearButtonPressed!,
-                )
-              : const SizedBox(
-                  height: 0.0,
-                  width: 0.0,
-                ),
+    return Row(
+      children: [
+        Expanded(flex: 9, child: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: pressed,),),
+        Expanded(
+          flex: 1,
+          child: Container(
+            alignment: Alignment.center,
+            height: 40.0,
+            margin: showSearchIcon!
+                ? const EdgeInsets.only(bottom: 3.5, top: 3.5, right: 2.0, left: 2.0)
+                : isSearching!
+                    ? const EdgeInsets.only(bottom: 3.5, top: 3.5, right: 10.0)
+                    : const EdgeInsets.only(
+                        bottom: 3.5, top: 3.5, right: 10.0, left: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: searchBackgroundColor ?? Colors.blueGrey.withOpacity(.2),
+            ),
+            child: TextField(
+              controller: searchQueryController,
+              focusNode: searchFocusNode,
+              decoration: InputDecoration(
+                hintText: "Search...",
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                hintStyle: TextStyle(color: searchTextHintColor),
+                suffixIcon: searchQueryController!.text.isNotEmpty
+                    ? IconButton(
+                        alignment: Alignment.centerRight,
+                        color: clearSearchButtonColor,
+                        icon: const Icon(Icons.clear),
+                        onPressed: onClearButtonPressed!,
+                      )
+                    : const SizedBox(
+                        height: 0.0,
+                        width: 0.0,
+                      ),
+              ),
+              textAlignVertical: TextAlignVertical.center,
+              textInputAction: TextInputAction.search,
+              style: TextStyle(color: searchTextColor, fontSize: 16.0),
+              onChanged: (query) => onSearchQueryChanged!(query),
+              // onSubmitted: (query) => onSearchQueryUpdated!(query),
+              // onEditingComplete: () => onEditingComplete!,
+            ),
+          ),
         ),
-        textAlignVertical: TextAlignVertical.center,
-        textInputAction: TextInputAction.search,
-        style: TextStyle(color: searchTextColor, fontSize: 16.0),
-        onChanged: (query) => onSearchQueryChanged!(query),
-        // onSubmitted: (query) => onSearchQueryUpdated!(query),
-        // onEditingComplete: () => onEditingComplete!,
-      ),
+      ],
     );
   }
 }
