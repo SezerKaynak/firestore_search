@@ -38,7 +38,7 @@ class FirestoreSearchScaffold extends StatefulWidget {
   final String? searchBy;
   final String? appBarTitle;
   final List Function(QuerySnapshot) dataListFromSnapshot;
-
+  final Function()? pressed;
   /// Refers to the [builder] parameter of StreamBuilder used to
   ///
   /// retrieve search results from cloud_firestore
@@ -69,11 +69,12 @@ class FirestoreSearchScaffold extends StatefulWidget {
     this.searchIconColor,
     this.appBarTitle,
     this.appBarTitleColor,
+    
     required String this.firestoreCollectionName,
     required this.searchBy,
     required this.dataListFromSnapshot,
     this.builder,
-    this.limitOfRetrievedData = 10,
+    this.limitOfRetrievedData = 10, this.pressed,
   }) : //Firestore parameters assertions
         assert(limitOfRetrievedData >= 1 && limitOfRetrievedData <= 30,
             'limitOfRetrievedData should be between 1 and 30.\n');
@@ -140,6 +141,7 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
                             searchTextHintColor: widget.searchTextHintColor,
                             onClearButtonPressed: clearSearchQuery,
                             onSearchQueryChanged: updateSearchQuery,
+                            pressed: widget.pressed,
                           )
                         : Container(
                             margin: const EdgeInsets.only(left: 14.0),

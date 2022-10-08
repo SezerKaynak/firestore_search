@@ -34,9 +34,9 @@ class SearchFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(flex: 9, child: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: pressed,),),
+        Expanded(flex: 1, child: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: pressed,),),
         Expanded(
-          flex: 1,
+          flex: 9,
           child: Container(
             alignment: Alignment.center,
             height: 40.0,
