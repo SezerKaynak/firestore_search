@@ -115,17 +115,6 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
           title: Row(
             children: [
               if (isSearching)
-                BackButton(
-                  color: widget.backButtonColor,
-                  onPressed: () {
-                    setState(() {
-                      isSearching = false;
-                      searchFocusNode.unfocus();
-                      clearSearchQuery();
-                    });
-
-                  },
-                ),
               Expanded(
                 child: widget.showSearchIcon
                     ? isSearching
