@@ -20,9 +20,9 @@ class FirestoreService<T> {
     return query.isEmpty
         ? Stream.empty()
         : collectionReference
-            .orderBy('$searchBy'.toLowerCase(), descending: false)
-            .where('$searchBy'.toLowerCase(), isGreaterThanOrEqualTo: query)
-            .where('$searchBy'.toLowerCase(), isLessThan: query + 'z')
+            .orderBy('${searchBy!.toLowerCase()}', descending: false)
+            .where('${searchBy!.toLowerCase()}', isGreaterThanOrEqualTo: query)
+            .where('${searchBy!.toLowerCase()}', isLessThan: query + 'z')
             .limit(limitOfRetrievedData!)
             .snapshots()
             .map(dataListFromSnapshot!);
