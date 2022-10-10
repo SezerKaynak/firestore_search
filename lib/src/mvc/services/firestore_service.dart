@@ -17,7 +17,7 @@ class FirestoreService<T> {
 
   Stream<List> searchData(String query) {
     final collectionReference = firebaseFirestore.collection(collectionName!);
-    return query.isEmpty
+    return query.toLowerCase().isEmpty
         ? Stream.empty()
         : collectionReference
             .orderBy('$searchBy', descending: false)
