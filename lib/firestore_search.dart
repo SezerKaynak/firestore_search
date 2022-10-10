@@ -38,7 +38,6 @@ class FirestoreSearchScaffold extends StatefulWidget {
   final String? searchBy;
   final String? appBarTitle;
   final List Function(QuerySnapshot) dataListFromSnapshot;
-  final Function()? pressed;
   /// Refers to the [builder] parameter of StreamBuilder used to
   ///
   /// retrieve search results from cloud_firestore
@@ -74,7 +73,7 @@ class FirestoreSearchScaffold extends StatefulWidget {
     required this.searchBy,
     required this.dataListFromSnapshot,
     this.builder,
-    this.limitOfRetrievedData = 10, this.pressed,
+    this.limitOfRetrievedData = 10,
   }) : //Firestore parameters assertions
         assert(limitOfRetrievedData >= 1 && limitOfRetrievedData <= 30,
             'limitOfRetrievedData should be between 1 and 30.\n');
@@ -114,20 +113,6 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
           titleSpacing: 0.0,
           title: Row(
             children: [
-                BackButton(
-                  color: widget.backButtonColor,
-                  onPressed: pressed,
-                    
-//                   () {
-//                     setState(() {
-//                       isSearching = false;
-//                       searchFocusNode.unfocus();
-//                       clearSearchQuery();
-                      
-//                     });
-// ;
-//                   },
-                ),
               Expanded(
                 child: widget.showSearchIcon
                     ? isSearching
@@ -143,7 +128,6 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
                             searchTextHintColor: widget.searchTextHintColor,
                             onClearButtonPressed: clearSearchQuery,
                             onSearchQueryChanged: updateSearchQuery,
-                            pressed: widget.pressed,
                           )
                         : Container(
                             margin: const EdgeInsets.only(left: 14.0),
@@ -162,7 +146,6 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
                         searchTextHintColor: widget.searchTextHintColor,
                         onClearButtonPressed: clearSearchQuery,
                         onSearchQueryChanged: updateSearchQuery,
-                        pressed: widget.pressed,
                       ),
               ),
               if (widget.showSearchIcon)
@@ -210,7 +193,6 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
         ));
   }
 
-  Function()? get pressed => widget.pressed;
 
   void updateSearchQuery(String newQuery) {
     setState(() {
