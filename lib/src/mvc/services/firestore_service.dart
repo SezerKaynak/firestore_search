@@ -17,11 +17,11 @@ class FirestoreService<T> {
 
   Stream<List> searchData(String query) {
     final collectionReference = firebaseFirestore.collection(collectionName!);
-    return query.toLowerCase().isEmpty
+    return query.isEmpty
         ? Stream.empty()
         : collectionReference
             .orderBy('$searchBy', descending: false)
-            .where('$searchBy', isGreaterThanOrEqualTo: query)
+            .where('$searchBy', isGreaterThanOrEqualTo: query.toLowerCase())
             .where('$searchBy', isLessThan: query + 'z')
             .limit(limitOfRetrievedData!)
             .snapshots()
