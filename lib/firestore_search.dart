@@ -28,7 +28,7 @@ class FirestoreSearchScaffold extends StatefulWidget {
   final Color? searchBodyBackgroundColor;
   final Color? appBarTitleColor;
   final Color? searchIconColor;
-
+  final Function()? pressed;
   final bool showSearchIcon;
 
   /// Name of the cloud_firestore collection you
@@ -73,7 +73,7 @@ class FirestoreSearchScaffold extends StatefulWidget {
     required this.searchBy,
     required this.dataListFromSnapshot,
     this.builder,
-    this.limitOfRetrievedData = 10,
+    this.limitOfRetrievedData = 10, this.pressed,
   }) : //Firestore parameters assertions
         assert(limitOfRetrievedData >= 1 && limitOfRetrievedData <= 30,
             'limitOfRetrievedData should be between 1 and 30.\n');
@@ -108,6 +108,7 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
     return Scaffold(
         backgroundColor: widget.scaffoldBackgroundColor,
         appBar: AppBar(
+          leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: widget.backButtonColor), onPressed: widget.pressed,),
           backgroundColor: widget.appBarBackgroundColor,
           centerTitle: true,
           titleSpacing: 0.0,
