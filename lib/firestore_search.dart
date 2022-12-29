@@ -197,7 +197,7 @@ class _FirestoreSearchScaffoldState extends State<FirestoreSearchScaffold> {
 
   void updateSearchQuery(String newQuery) {
     setState(() {
-      searchQuery = newQuery;
+      searchQuery = newQuery.toLowerCase();
     });
   }
 
